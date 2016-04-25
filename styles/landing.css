@@ -34,6 +34,21 @@ body.landing{
      position: relative;
      padding: 2rem;
      text-align: center;
+     opacity: 0;
+     -webkit-transform: scaleX(0.9) translateY(3rem);  /* Chrome, Safari, Opera */
+     -moz-transform: scaleX(0.9) translateY(3rem); /*Mozilla*/
+     -ms-transform:scaleX(0.9) translateY(3rem); /*Microsoft*/
+     transform: scaleX(0.9) translateY(3rem);
+     
+     /*<transition-property = all> <transition-duration = 0.25s> <transition-timing-function = ease-in-out>*/
+     -webkit-transition: all 0.3s ease-in-out;
+     -moz-transition: all 0.3s ease-in-out;
+     -ms-transition: all 0.3s ease-in-out;
+     transition: all 0.3s ease-in-out;
+     -webkit-transition-delay: 0.3s;
+     -moz-transition-delay: 0.3s;
+     -ms-transition-delay:0.3s;
+     transition-delay: 0.3s;
  }
  
  .point .point-title {
