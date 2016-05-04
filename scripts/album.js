@@ -82,14 +82,15 @@ var setCurrentAlbum = function(album) {
  
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 
-    window.onload = function() {
-    setCurrentAlbum(albumPicasso);
+var playButtonTemplate = '<a class="album-song-button"><span class = "ion-play"</span></a>';
 
-     songListContainer.addEventListener('mouseover', function(event){
-             console.log(event.target);
-         });
-     
-  
+window.onload = function() {
+setCurrentAlbum(albumPicasso);
+
+    songListContainer.addEventListener('mouseover', function(event){
+         console.log(event.target);
+     });
+
     var albums = [albumPicasso, albumMarconi, albumPrince];
     var index = 1; //declare outside, so state is remembered
      
@@ -99,7 +100,5 @@ var songListContainer = document.getElementsByClassName('album-view-song-list')[
          if(index == albums.length){
              index = 0;
          }
-         
-    });
-    
- };
+     });   
+  };
