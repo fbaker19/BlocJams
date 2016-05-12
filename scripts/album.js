@@ -10,7 +10,7 @@ var createSongRow = function(songNumber, songName, songLength) {
      var $row =  $(template);
      
      var clickHandler = function() {
-        var songNumber = $(this).attr('data-song-number');
+        var songNumber = parseInt($(this).attr('data-song-number'));
 
         if (currentlyPlayingSongNumber !== null) {
             var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
@@ -21,7 +21,7 @@ var createSongRow = function(songNumber, songName, songLength) {
             $(this).html(pauseButtonTemplate);
             currentlyPlayingSongNumber = songNumber;    
             currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
-            updatePlayerBarSong();
+             updatePlayerBarSong();
         
         } else if (currentlyPlayingSongNumber === songNumber) {
             $(this).html(playButtonTemplate);
@@ -29,6 +29,7 @@ var createSongRow = function(songNumber, songName, songLength) {
             currentlyPlayingSongNumber = null;
             currentSongFromAlbum = null;
         }   
+
      };
     
     /*var clickHandler = function(targetElement){
@@ -54,7 +55,8 @@ var createSongRow = function(songNumber, songName, songLength) {
 
      var onHover = function(event) {
         var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = songNumberCell.attr('data-song-number');
+        var songNumber = parseInt($(songNumberCell).attr('data-song-number'));
+      
 
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(playButtonTemplate);
@@ -73,7 +75,7 @@ var createSongRow = function(songNumber, songName, songLength) {
      });*/
      var offHover = function(event) {
         var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = songNumberCell.attr('data-song-number');
+        var songNumber = parseInt($(songNumberCell).attr('data-song-number'));
 
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(songNumber);
