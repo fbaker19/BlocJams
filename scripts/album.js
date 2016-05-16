@@ -135,7 +135,8 @@ var nextSong = function(){
     
     if(currentSongIndex >= currentAlbum.songs.length){
         currentSongIndex = 0;
-    }
+    }  
+    
     currentlyPlayingSongNumber = currentSongIndex + 1;
     currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
     
@@ -169,6 +170,7 @@ var previousSong = function(){
     if (currentSongIndex < 0) {
         currentSongIndex = currentAlbum.songs.length - 1;
     }
+    
     
     currentlyPlayingSongNumber = currentSongIndex + 1;
     currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
@@ -212,6 +214,9 @@ var updatePlayerBarSong = function() {
 
     var $previousButton = $('.main-controls .previous');
     var $nextButton = $('.main-controls .next');
+
+    var currentSoundFile = null;
+    
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
