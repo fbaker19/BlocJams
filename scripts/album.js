@@ -12,20 +12,17 @@
     
     var currentSoundFile = null;
     var currentVolume = 80;
-<<<<<<< HEAD
     
     var $playBarControls = $('.main-controls .play-pause');
-=======
->>>>>>> master
+
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
-<<<<<<< HEAD
+
     $playBarControls.click(togglePlayFromPlayerBar);
-=======
->>>>>>> master
+
   });
 
 
@@ -56,28 +53,19 @@ var createSongRow = function(songNumber, songName, songLength) {
         } else if (currentlyPlayingSongNumber === songNumber) {
             if(currentSoundFile.isPaused()){
                 $(this).html(pauseButtonTemplate);
-<<<<<<< HEAD
                 $playBarControls.html(playerBarPauseButton);
                 currentSoundFile.play();
             }else{
                 $(this).html(playButtonTemplate);
                 $playBarControls.html(playerBarPlayButton);
-=======
+
                 $('.main-controls .play-pause').html(playerBarPauseButton);
                 currentSoundFile.play();
-            }else{
-                $(this).html(playButtonTemplate);
-                $('.main-controls .play-pause').html(playerBarPlayButton);
->>>>>>> master
-                currentSoundFile.pause();
-            }
+           
         }   
     };
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> master
+
     /*var clickHandler = function(targetElement){
         var songItem = getSongItem(targetElement);
         if (currentlyPlayingSong === null) {
