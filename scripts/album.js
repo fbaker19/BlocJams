@@ -12,11 +12,14 @@
     
     var currentSoundFile = null;
     var currentVolume = 80;
+    
+    var $playBarControls = $('.main-controls .play-pause');
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    $playBarControls.click(togglePlayFromPlayerBar);
   });
 
 
@@ -28,7 +31,6 @@ var createSongRow = function(songNumber, songName, songLength) {
       + '  <td class="song-item-duration">' + songLength + '</td>'
       + '</tr>'
       ;
- 
      var $row =  $(template);
      
      var clickHandler = function() {
@@ -48,16 +50,16 @@ var createSongRow = function(songNumber, songName, songLength) {
         } else if (currentlyPlayingSongNumber === songNumber) {
             if(currentSoundFile.isPaused()){
                 $(this).html(pauseButtonTemplate);
-                $('.main-controls .play-pause').html(playerBarPauseButton);
+                $playBarControls.html(playerBarPauseButton);
                 currentSoundFile.play();
             }else{
                 $(this).html(playButtonTemplate);
-                $('.main-controls .play-pause').html(playerBarPlayButton);
+                $playBarControls.html(playerBarPlayButton);
                 currentSoundFile.pause();
             }
         }   
     };
-    
+
     /*var clickHandler = function(targetElement){
         var songItem = getSongItem(targetElement);
         if (currentlyPlayingSong === null) {
@@ -113,6 +115,25 @@ var createSongRow = function(songNumber, songName, songLength) {
      $row.hover(onHover, offHover);
      return $row
  };
+
+    
+var togglePlayFromPlayerBar = function(){
+    var songNumberCell = $(this).find('.song-item-number');
+    var songNumber = parseInt($(songNumberCell).attr('data-song-number'));
+
+     if(currentSoundFile.isPaused()){
+         
+            songNumberCell.html(pauseButtonTemplate);
+            $playBarControls.html(playerBarPauseButton);
+            currentSoundFile.play();
+        }else if(currentlyPlayingSongNumber === songNumber){
+         
+            songNumberCell.html(playButtonTemplate);
+            $playBarControls.html(playerBarPlayButton);
+            currentSoundFile.pause();
+        }
+};
+    
 
 var setSong = function(songNumber){
     if(currentSoundFile){
@@ -224,6 +245,5 @@ var updatePlayerBarSong = function() {
     $songTitle.text(currentSongFromAlbum.title);
     $artistName.text(currentAlbum.artist);
     $musicMobile.text(currentSongFromAlbum.title +" - "+ currentAlbum.artist);
-    $('.main-controls .play-pause').html(playerBarPauseButton);
 };
 
