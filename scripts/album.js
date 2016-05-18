@@ -15,14 +15,11 @@
     
     var $playBarControls = $('.main-controls .play-pause');
 
-
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
-
     $playBarControls.click(togglePlayFromPlayerBar);
-
   });
 
 
@@ -58,13 +55,10 @@ var createSongRow = function(songNumber, songName, songLength) {
             }else{
                 $(this).html(playButtonTemplate);
                 $playBarControls.html(playerBarPlayButton);
-
-                $('.main-controls .play-pause').html(playerBarPauseButton);
-                currentSoundFile.play();
-           
+                currentSoundFile.pause();
+            }
         }   
     };
-
 
     /*var clickHandler = function(targetElement){
         var songItem = getSongItem(targetElement);
@@ -124,15 +118,18 @@ var createSongRow = function(songNumber, songName, songLength) {
 
     
 var togglePlayFromPlayerBar = function(){
-    var songNumberCell = $(this).find('.song-item-number');
-    var songNumber = parseInt($(songNumberCell).attr('data-song-number'));
-
+    if(currentSoundFile == null){
+        return;
+    }
+    
+    var songNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+    // console.log(songNumberCell); 
      if(currentSoundFile.isPaused()){
          
             songNumberCell.html(pauseButtonTemplate);
             $playBarControls.html(playerBarPauseButton);
             currentSoundFile.play();
-        }else if(currentlyPlayingSongNumber === songNumber){
+        }else {
          
             songNumberCell.html(playButtonTemplate);
             $playBarControls.html(playerBarPlayButton);
@@ -252,4 +249,3 @@ var updatePlayerBarSong = function() {
     $artistName.text(currentAlbum.artist);
     $musicMobile.text(currentSongFromAlbum.title +" - "+ currentAlbum.artist);
 };
-
