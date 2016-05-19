@@ -47,6 +47,13 @@ var createSongRow = function(songNumber, songName, songLength) {
              setSong(songNumber);
              currentSoundFile.play();
              updateSeekBarWhileSongPlays();
+             currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+             
+            var $volumeFill = $('.volume .fill');
+            var $volumeThumb = $('.volume .thumb');
+            $volumeFill.width(currentVolume + '%');
+            $volumeThumb.css({left: currentVolume + '%'});
+             
              updatePlayerBarSong();
                 //pause -> play
         } else if (currentlyPlayingSongNumber === songNumber) {
@@ -176,8 +183,16 @@ var setUpSeekBars = function(){
         
         var seekBarFillRatio = offsetX/barWidth;
         
+        if($(this).parent().attr('class') == 'seek-control') {
+            seek(seekBarFillRatio * currentSoundFile.getDuration());
+        } else {
+            setVolume(seekBarFillRatio * 100);   
+        }
+        
         updateSeekPercentage($(this), seekBarFillRatio);
     });
+    
+   
     
     $seekBars.find('.thumb').mousedown(function(event){
         var $seekBar = $(this).parent();
@@ -188,10 +203,16 @@ var setUpSeekBars = function(){
             
             var seekBarFillRatio = offsetX/barWidth;
             
+            if ($seekBar.parent().attr('class') == 'seek-control') {
+                seek(seekBarFillRatio * currentSoundFile.getDuration());   
+            } else {
+                setVolume(seekBarFillRatio);
+            }
+            
             updateSeekPercentage($seekBar, seekBarFillRatio);
         });
         
-        $(document).bind('mouseup.thumb', function(){
+      $(document).bind('mouseup.thumb', function(){
             $(document).unbind('mousemove.thumb');
             $(document).unbind('mouseup.thumb');
         });
