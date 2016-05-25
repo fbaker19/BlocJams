@@ -98,18 +98,14 @@ var createSongRow = function(songNumber, songName, songLength) {
  };
     
 var setCurrentTimeInPlayerBar = function(currentTime){
-   // currentAlbum = ;
-    currentTime = $('.current-time').text(currentAlbum.duration);
-   //console.log(currentTime);//timeupdate in console
+     $('.current-time').text(currentTime);
+   // console.log(currentTime);//timeupdate in console
 };
 
 var setTotalTimeInPlayerBar = function(totalTime){
    
-    totalTime = $('.total-time').text(currentAlbum.duration);
-    
-    parseFloat(totalTime);
-  
-    console.log(totalTime);
+    $('.total-time').text(totalTime);
+    console.log(totalTime);//not console.logging?
     
     // Replace the strings stored in each length property with the following values - in 'duration section' in songs
 };
@@ -122,9 +118,13 @@ var filterTimeCode = function(timeInSeconds){
         var offsetTime = timeInSeconds * 60;
             var wholeSeconds = Math.floor(offsetTime);
             var wholeMinutes = Math.floor(offsetTime);
- 
+            
+            parseFloat(wholeSeconds);
+            parseFloat(wholeMinutes);
+            
         var timeFormatter = wholeMinutes +':'+ wholeSeconds;
         $wholeSeconds.find('.current-time').length(timeFormatter);
+    
     
     return timeFormatter;
 };
@@ -194,7 +194,7 @@ var updateSeekBarWhileSongPlays = function(){
             
             setCurrentTimeInPlayerBar('timeupdate');
             updateSeekPercentage($seekBar, seekBarFillRatio);
-            setCurrentTimeInPlayerBar();
+            setCurrentTimeInPlayerBar(this.getTime());
         });
     }
 };
@@ -344,5 +344,7 @@ var updatePlayerBarSong = function() {
     $artistName.text(currentAlbum.artist);
     $musicMobile.text(currentSongFromAlbum.title +" - "+ currentAlbum.artist);
     
-    setTotalTimeInPlayerBar();
+    setTotalTimeInPlayerBar(currentSongFromAlbum.duration);
+    
+   // console.log(currentAlbum)
 };
